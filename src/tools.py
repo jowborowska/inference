@@ -309,7 +309,7 @@ def create_smoothed_map(model, model_params, halos=None):
     model.map_obj.pix_binedges_x = np.linspace(
         model.map_obj.pix_binedges_x[0], model.map_obj.pix_binedges_x[-1],
         int(factor * (len(model.map_obj.pix_binedges_x) - 1) + 1))
-       
+    print (int(factor * (len(model.map_obj.pix_binedges_y) - 1) + 1)) 
     model.map_obj.pix_binedges_y = np.linspace(
         model.map_obj.pix_binedges_y[0], model.map_obj.pix_binedges_y[-1],
         int(factor * (len(model.map_obj.pix_binedges_y) - 1) + 1))
@@ -334,10 +334,10 @@ def create_smoothed_map(model, model_params, halos=None):
     
     # change grid to low resolution again
     model.map_obj.Ompix *= factor * factor
-
+    print (int((len(model.map_obj.pix_binedges_x) - 1) / factor + 1))
     model.map_obj.pix_binedges_x = np.linspace(
         model.map_obj.pix_binedges_x[0], model.map_obj.pix_binedges_x[-1],
-        (len(model.map_obj.pix_binedges_x) - 1) / factor + 1)
+        int((len(model.map_obj.pix_binedges_x) - 1) / factor + 1))
 
     model.map_obj.pix_binedges_y = np.linspace(
         model.map_obj.pix_binedges_y[0], model.map_obj.pix_binedges_y[-1],
