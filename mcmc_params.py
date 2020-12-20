@@ -128,7 +128,7 @@ prior_params['power'] = [
     [0.4, 0.1],     # sigma
 ]
 
-halo_catalogue_folder = 'catalogues_2deg/' #'catalogues/'
+halo_catalogue_folder = '/mn/stornext/d16/cmbco/comap/haavard/im_inference/catalogues_2deg/' #'catalogues/'
 
 min_mass = 2.5e10  # 1e12  # 2.5e10
 
