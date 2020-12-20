@@ -30,6 +30,7 @@ for mappath in map_paths:
    my_ps.make_h5()
 
 k_smooth = k
+ps_smooth = ps_2d
 single_sigma_notsmooth = []
 single_ps_notsmooth = []
 
@@ -44,6 +45,7 @@ for mappath in map_paths_notsmooth:
    my_ps.make_h5()
 
 k_notsmooth = k 
+ps_notsmooth = ps_2d
 def coadd_ps(ps_list, sigma_list):
    N = len(ps_list)
    ps_mean = 0
@@ -69,6 +71,8 @@ ps_notsmooth, error_notsmooth = coadd_ps(single_ps_notsmooth,single_sigma_notsmo
 smooth_mean = coadd_without_weights(single_ps_smooth,single_sigma_smooth)
 notsmooth_mean = coadd_without_weights(single_ps_notsmooth,single_sigma_notsmooth)
 
+np.save('ps_smooth_single.npy', ps_smooth)
+np.save('ps_notsmooth_single.npy', ps_notsmooth)
 np.save('smooth_mean.npy', smooth_mean)
 np.save('notsmooth_mean.npy', notsmooth_mean)
 np.save('ps_2d_smooth.npy', ps_smooth)      
