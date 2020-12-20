@@ -1,6 +1,6 @@
 import numpy as np
 import h5py
-import tools
+import tools_ps as tools
 
 class MapCosmo():
     def __init__(self, mappath, feed=None, jk=None, split=None):
