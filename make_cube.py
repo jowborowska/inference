@@ -47,7 +47,7 @@ if smoothed == 'no':
 
 if smoothed == 'yes':
    print ('smoothed map created')
-   map_obj.map, map_obj.lum_func = src.tools.create_smoothed_map(model, model_params)
+   map_obj.map, map_obj.lum_func = src.tools.create_smoothed_map_3d(model, model_params) #<---- TRY 3D
 
 
 #map_obj.map, map_obj.lum_func = src.tools.create_smoothed_map_3d(
