@@ -341,7 +341,7 @@ def create_smoothed_map(model, model_params, halos=None):
 
     model.map_obj.pix_binedges_y = np.linspace(
         model.map_obj.pix_binedges_y[0], model.map_obj.pix_binedges_y[-1],
-        (len(model.map_obj.pix_binedges_y) - 1) / factor + 1)
+        int((len(model.map_obj.pix_binedges_y) - 1) / factor + 1))
     
     # degrade map back to low-res grid
     model.map_obj.map = degrade(model.map_obj.map, factor)
