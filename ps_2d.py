@@ -56,9 +56,21 @@ def coadd_ps(ps_list, sigma_list):
    ps_error = w_sum**(-0.5)
    return np.array(ps_mean), np.array(ps_error)
 
+def coadd_without_weights(ps_list, sigma_list):
+   N = len(ps_list)
+   ps_mean = 0
+   for i in range(N):
+      ps_mean += ps_list[i]
+   ps_mean = ps_mean/N
+   return ps_mean
+
 ps_smooth, error_smooth = coadd_ps(single_ps_smooth,single_sigma_smooth)
 ps_notsmooth, error_notsmooth = coadd_ps(single_ps_notsmooth,single_sigma_notsmooth)
+smooth_mean = coadd_without_weights(single_ps_smooth,single_sigma_smooth)
+notsmooth_mean = coadd_without_weights(single_ps_notsmooth,single_sigma_notsmooth)
 
+np.save('smooth_mean.npy', smooth_mean)
+np.save('notsmooth_mean.npy', notsmooth_mean)
 np.save('ps_2d_smooth.npy', ps_smooth)      
 np.save('ps_2d_notsmooth.npy', ps_notsmooth)   
 np.save('k_smooth.npy', k_smooth)
