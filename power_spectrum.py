@@ -52,7 +52,7 @@ class PowerSpectrum():
     def make_h5(self, outname=None):
         if outname is None:
             #folder = '/mn/stornext/d16/cmbco/comap/protodir/spectra/'
-            folder = 'spectra'         # have changed it to be on my computer
+            folder = 'spectra/'         # have changed it to be on my computer
             tools.ensure_dir_exists(folder)
             outname = folder + 'ps' + self.map.save_string + '.h5'            
 
