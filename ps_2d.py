@@ -71,6 +71,15 @@ ps_notsmooth, error_notsmooth = coadd_ps(single_ps_notsmooth,single_sigma_notsmo
 smooth_mean = coadd_without_weights(single_ps_smooth,single_sigma_smooth)
 notsmooth_mean = coadd_without_weights(single_ps_notsmooth,single_sigma_notsmooth)
 
+mappath = 'smoothed3d_map.h5'
+my_map = map_cosmo.MapCosmo(mappath)
+my_ps = power_spectrum.PowerSpectrum(my_map)
+ps_from3d, k, nmodes = my_ps.calculate_ps(do_2d=True)
+rms_ps_mean, rms_ps_std = my_ps.run_noise_sims(10)
+my_ps.make_h5()
+np.save('ps_2dfrom3d.npy', ps_from3d) #smoothed one
+
+
 np.save('ps_smooth_single.npy', ps_smooth)
 np.save('ps_notsmooth_single.npy', ps_notsmooth)
 np.save('smooth_mean.npy', smooth_mean)
