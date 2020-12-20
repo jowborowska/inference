@@ -70,7 +70,7 @@ rms = np.zeros_like(my_map) + 1.0
 sh = my_map.shape
 my_map = np.random.randn(*sh)
 
-outname = 'noise_map.h5'
+outname = 'smoothed_map.h5'
 f2 = h5py.File(outname, 'w')
 
 f2.create_dataset('x', data=map_obj.pix_bincents_x)
