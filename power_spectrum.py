@@ -59,7 +59,7 @@ class PowerSpectrum():
         f1 = h5py.File(outname, 'w')
         try:
             f1.create_dataset('mappath', data=self.map.mappath)
-            f1.create_dataset('ps', data=self.ps)
+            #f1.create_dataset('ps', data=self.ps)
             f1.create_dataset('k', data=self.k)
             #f1.create_dataset('k_bin_edges', data=self.k_bin_edges)
             f1.create_dataset('nmodes', data=self.nmodes)
