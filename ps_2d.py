@@ -19,7 +19,7 @@ except IndexError:
 '''
 single_sigma_smooth = []
 single_ps_smooth = []
-map_paths = ['smoothed_map.h5','smoothed_map1.h5','smoothed_map2.h5','smoothed_map3.h5','smoothed_map4.h5','smoothed_map5.h5','smoothed_map6.h5','smoothed_map7.h5','smoothed_map8.h5','smoothed_map9.h5','smoothed_map10.h5']
+map_paths = ['smoothed_map.h5','smoothed_map2.h5','smoothed_map3.h5','smoothed_map4.h5','smoothed_map5.h5','smoothed_map6.h5','smoothed_map7.h5','smoothed_map8.h5','smoothed_map9.h5','smoothed_map10.h5']
 for mappath in map_paths:
    my_map = map_cosmo.MapCosmo(mappath)
    my_ps = power_spectrum.PowerSpectrum(my_map)
@@ -32,7 +32,7 @@ for mappath in map_paths:
 single_sigma_notsmooth = []
 single_ps_notsmooth = []
 
-map_paths_notsmooth = ['notsmoothed_map.h5','notsmoothed_map1.h5','notsmoothed_map2.h5','notsmoothed_map3.h5','notsmoothed_map4.h5','notsmoothed_map5.h5','notsmoothed_map6.h5','notsmoothed_map7.h5','notsmoothed_map8.h5','notsmoothed_map9.h5','notsmoothed_map10.h5']
+map_paths_notsmooth = ['notsmoothed_map.h5','notsmoothed_map2.h5','notsmoothed_map3.h5','notsmoothed_map4.h5','notsmoothed_map5.h5','notsmoothed_map6.h5','notsmoothed_map7.h5','notsmoothed_map8.h5','notsmoothed_map9.h5','notsmoothed_map10.h5']
 for mappath in map_paths_notsmooth:
    my_map = map_cosmo.MapCosmo(mappath)
    my_ps = power_spectrum.PowerSpectrum(my_map)
