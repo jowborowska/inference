@@ -39,12 +39,14 @@ model, observables, _, map_obj = src.tools.set_up_mcmc(
 
 model_params = [-2.75, 0.05, 10.61, 12.3, 0.42]   # realistic model
 
-#map_obj.map, map_obj.lum_func = model.generate_map(model_params)
+map_obj.map, map_obj.lum_func = model.generate_map(model_params)
 print ('before')
+'''
 map_obj.map, map_obj.lum_func = src.tools.create_smoothed_map(
     model, model_params
 )
 print ('after')
+'''
 #map_obj.map, map_obj.lum_func = src.tools.create_smoothed_map_3d(
 #    model, model_params
 #)
@@ -72,7 +74,7 @@ rms = np.zeros_like(my_map) + 1.0
 sh = my_map.shape
 my_map = np.random.randn(*sh)
 
-outname = 'smoothed_map2.h5'
+outname = 'notsmoothed_map.h5'
 f2 = h5py.File(outname, 'w')
 
 f2.create_dataset('x', data=map_obj.pix_bincents_x)
