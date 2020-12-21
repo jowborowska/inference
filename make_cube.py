@@ -42,12 +42,12 @@ model_params = [-2.75, 0.05, 10.61, 12.3, 0.42]   # realistic model
 
 smoothed = sys.argv[2]
 if smoothed == 'no':
-   print ('not smoothed map created')
+   print ('unmoothed map created')
    map_obj.map, map_obj.lum_func = model.generate_map(model_params)
 
 if smoothed == 'yes':
    print ('smoothed map created')
-   map_obj.map, map_obj.lum_func = src.tools.create_smoothed_map_3d(model, model_params) #<---- TRY 3D
+   map_obj.map, map_obj.lum_func = src.tools.create_smoothed_map(model, model_params) #<---- TRY 3D
 
 
 #map_obj.map, map_obj.lum_func = src.tools.create_smoothed_map_3d(
@@ -75,7 +75,7 @@ plt.show()
 rms = np.zeros_like(my_map) + 1.0
 
 sh = my_map.shape
-my_map = np.random.randn(*sh)
+#my_map = np.random.randn(*sh)
 
 outname = sys.argv[1] + '.h5'
 f2 = h5py.File(outname, 'w')
