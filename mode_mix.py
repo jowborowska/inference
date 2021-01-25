@@ -49,6 +49,7 @@ ps_weights_arr = []
 ps_noweights_arr = []
 k_arr = []
 for i in range(10):
+   print (i + '. realization out of 10')
    src.tools.make_picklable((exp_params, mcmc_params))
    mcmc_params.observables = ('ps', 'vid')
    model, observables, _, map_obj = src.tools.set_up_mcmc(mcmc_params, exp_params)
@@ -69,6 +70,7 @@ for i in range(10):
    f.create_dataset('y', data=y)
    f.create_dataset('map_coadd', data=signal_map)
    f.create_dataset('rms_coadd', data=real_rms)
+   f.close()
 
    #Calculate PS with weights
    my_map = map_cosmo.MapCosmo('sim_signal_real_rms.h5')
