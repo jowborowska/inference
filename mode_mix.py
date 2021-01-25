@@ -23,4 +23,4 @@ with h5py.File(signal_map, mode="r") as my_file2:
    y = np.array(my_file2['y'][:])
    signal_map = np.array(my_file2['map_beam'][:])
 
-print (real_rms.hape, x.shape, y.shape, signal_map.shape)
+print (real_rms.shape, x.shape, y.shape, signal_map.shape)
