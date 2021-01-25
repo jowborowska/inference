@@ -114,7 +114,22 @@ plt.xticks(ticks=labnums)
 plt.tight_layout()
 plt.savefig('mode_mix.png')
 
-
-
+mode_mixing_tf = ps_weights_arr/ps_noweights_arr
+our_estimate = np.mean(mode_mixing_tf, axis=1)
+error_bars = np.std(mode_mixing_tf, axis=1)
+fig = plt.figure()
+ax1 = fig.add_subplot(111)
+ax1.errorbar(k_arr[0],our_estimate, error_bars, color='black')
+ax1.set_ylabel(r'$\mathrm{P^{weights}(k)/P(k)}$', fontsize=14)
+ax1.set_xlabel(r'$k$ [Mpc${}^{-1}$]', fontsize=14)
+labnums = [0.05,0.1, 0.2, 0.5]
+ax1.set_xlim(0.04,0.7)
+ax1.set_xscale('log')
+ax1.set_ylim(0.5,3.)
+ax1.grid()
+ax1.set_xticks(labnums)
+ax1.get_xaxis().set_major_formatter(matplotlib.ticker.ScalarFormatter())
+plt.tight_layout()
+plt.savefig('mode_mix2.png')
 
 
