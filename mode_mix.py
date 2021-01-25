@@ -97,6 +97,7 @@ mode_mixing_tf = np.zeros_like(ps_weights_arr)
 ps_weights_arr = np.load('ps_weights.npy')
 ps_noweights_arr = np.load('ps_no_weights.npy')
 k_arr = np.load('k_arr.npy')
+mode_mixing_tf = np.zeros_like(ps_weights_arr)
 
 plt.figure()
 for i in range(10):
