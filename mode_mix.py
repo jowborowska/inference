@@ -26,7 +26,7 @@ import socket
 import sys
 import importlib
 import h5py
-
+'''
 #first I want to read a real rms map
 real_map = '/mn/stornext/d16/cmbco/comap/protodir/maps/co2_map_signal.h5'
 with h5py.File(real_map, mode="r") as my_file:
@@ -93,12 +93,19 @@ ps_weights_arr = np.array(ps_weights_arr)
 ps_noweights_arr = np.array(ps_noweights_arr)
 k_arr = np.array(k_arr)
 mode_mixing_tf = np.zeros_like(ps_weights_arr)
-
+'''
+ps_weights_arr = np.load('ps_weights.npy')
+ps_noweights_arr = np.load('ps_no_weights.npy')
+k_arr = np.load('k_arr.npy')
 
 plt.figure()
 for i in range(10):
    mode_mixing_tf[i] = ps_weights_arr[i]/ps_noweights_arr[i]
    plt.plot(k_arr[i], mode_mixing_tf[i])
+plt.xscale('log')
+plt.yscale('log')
+plt.ylabel(r'$\mathrm{P^{weights}(k)/P(k)}$', fontsize=16)
+plt.xlabel(r'$k$ [Mpc${}^{-1}$]', fontsize=16)
 plt.savefig('mode_mix.png')
 
 
