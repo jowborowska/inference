@@ -105,7 +105,7 @@ for i in range(10):
    plt.plot(k_arr[i], mode_mixing_tf[i])
 plt.xscale('log')
 #plt.yscale('log')
-plt.ylim(0.0,7.0)
+plt.ylim(0.5,3.5)
 plt.xlim(0.04,0.7)
 plt.ylabel(r'$\mathrm{P^{weights}(k)/P(k)}$', fontsize=16)
 plt.xlabel(r'$k$ [Mpc${}^{-1}$]', fontsize=16)
