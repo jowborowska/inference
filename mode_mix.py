@@ -104,9 +104,11 @@ for i in range(10):
    mode_mixing_tf[i] = ps_weights_arr[i]/ps_noweights_arr[i]
    plt.plot(k_arr[i], mode_mixing_tf[i])
 plt.xscale('log')
-plt.yscale('log')
+#plt.yscale('log')
+plt.xlim(0.04,0.7)
 plt.ylabel(r'$\mathrm{P^{weights}(k)/P(k)}$', fontsize=16)
 plt.xlabel(r'$k$ [Mpc${}^{-1}$]', fontsize=16)
+plt.tight_layout()
 plt.savefig('mode_mix.png')
 
 
