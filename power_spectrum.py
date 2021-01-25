@@ -57,7 +57,7 @@ class PowerSpectrum():
                )
                return self.ps, self.k, self.nmodes
     
-    def run_noise_sims(self,weights=True, n_sims): #only white noise here
+    def run_noise_sims(self,weights=True, n_sims=10): #only white noise here
         if weights == True:
            if not self.weights_are_normalized: self.normalize_weights()
         
