@@ -49,7 +49,7 @@ ps_weights_arr = []
 ps_noweights_arr = []
 k_arr = []
 for i in range(10):
-   print (i + '. realization out of 10')
+   print (i, '. realization out of 10')
    src.tools.make_picklable((exp_params, mcmc_params))
    mcmc_params.observables = ('ps', 'vid')
    model, observables, _, map_obj = src.tools.set_up_mcmc(mcmc_params, exp_params)
