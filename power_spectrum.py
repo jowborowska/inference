@@ -11,43 +11,81 @@ class PowerSpectrum():
 
     def normalize_weights(self):
         self.map.w = self.map.w / np.sqrt(np.mean(self.map.w.flatten() ** 2))
+        
+        wi = self.map.w
+        wh_i = np.where(np.log10(wi) < -0.5)
+        self.map.w[wh_i] = 0.0
         self.weights_are_normalized = True
     
-    def calculate_ps(self, do_2d=False):
+    def calculate_ps(self, do_2d=False, weights=True):
         n_k = 15
 
-        if not self.weights_are_normalized: self.normalize_weights()
-        if do_2d: #to get 2d PS surface
-            self.k_bin_edges_par = np.logspace(-2.0, np.log10(1.0), n_k)
-            self.k_bin_edges_perp = np.logspace(-2.0 + np.log10(2), np.log10(1.5), n_k)
+        if weights == True:
+           if not self.weights_are_normalized: self.normalize_weights()
+           if do_2d: #to get 2d PS surface
+               self.k_bin_edges_par = np.logspace(-2.0, np.log10(1.0), n_k)
+               self.k_bin_edges_perp = np.logspace(-2.0 + np.log10(2), np.log10(1.5), n_k)
             
-            self.ps_2d, self.k, self.nmodes = tools.compute_power_spec_perp_vs_par(
-                self.map.map * self.map.w, (self.k_bin_edges_perp, self.k_bin_edges_par),
-                dx=self.map.dx, dy=self.map.dy, dz=self.map.dz
-            )
-            return self.ps_2d, self.k, self.nmodes
-        else:
-            self.k_bin_edges = np.logspace(-2.0, np.log10(1.5), n_k)
-            self.ps, self.k, self.nmodes = tools.compute_power_spec3d(
-                self.map.map * self.map.w, self.k_bin_edges,
-                dx=self.map.dx, dy=self.map.dy, dz=self.map.dz
-            )
-            return self.ps, self.k, self.nmodes
+               self.ps_2d, self.k, self.nmodes = tools.compute_power_spec_perp_vs_par(
+                   self.map.map * self.map.w, (self.k_bin_edges_perp, self.k_bin_edges_par),
+                   dx=self.map.dx, dy=self.map.dy, dz=self.map.dz
+               )
+               return self.ps_2d, self.k, self.nmodes
+           else:
+               self.k_bin_edges = np.logspace(-2.0, np.log10(1.5), n_k)
+               self.ps, self.k, self.nmodes = tools.compute_power_spec3d(
+                   self.map.map * self.map.w, self.k_bin_edges,
+                   dx=self.map.dx, dy=self.map.dy, dz=self.map.dz
+               )
+               return self.ps, self.k, self.nmodes
+        if weights == False:
+          
+           if do_2d: #to get 2d PS surface
+               self.k_bin_edges_par = np.logspace(-2.0, np.log10(1.0), n_k)
+               self.k_bin_edges_perp = np.logspace(-2.0 + np.log10(2), np.log10(1.5), n_k)
+            
+               self.ps_2d, self.k, self.nmodes = tools.compute_power_spec_perp_vs_par(
+                   self.map.map, (self.k_bin_edges_perp, self.k_bin_edges_par),
+                   dx=self.map.dx, dy=self.map.dy, dz=self.map.dz
+               )
+               return self.ps_2d, self.k, self.nmodes
+           else:
+               self.k_bin_edges = np.logspace(-2.0, np.log10(1.5), n_k)
+               self.ps, self.k, self.nmodes = tools.compute_power_spec3d(
+                   self.map.map, self.k_bin_edges,
+                   dx=self.map.dx, dy=self.map.dy, dz=self.map.dz
+               )
+               return self.ps, self.k, self.nmodes
     
-    def run_noise_sims(self, n_sims): #only white noise here
-        if not self.weights_are_normalized: self.normalize_weights()
+    def run_noise_sims(self,weights=True, n_sims): #only white noise here
+        if weights == True:
+           if not self.weights_are_normalized: self.normalize_weights()
         
-        rms_ps = np.zeros((len(self.k_bin_edges_perp) - 1, len(self.k_bin_edges_par) - 1, n_sims))
-        for i in range(n_sims):
-            randmap = self.map.rms * np.random.randn(*self.map.rms.shape)
+           rms_ps = np.zeros((len(self.k_bin_edges_perp) - 1, len(self.k_bin_edges_par) - 1, n_sims))
+           for i in range(n_sims):
+               randmap = self.map.rms * np.random.randn(*self.map.rms.shape)
 
-            rms_ps[:,:,i] = tools.compute_power_spec_perp_vs_par(
-                randmap * self.map.w, (self.k_bin_edges_perp, self.k_bin_edges_par),
-                dx=self.map.dx, dy=self.map.dy, dz=self.map.dz
-                )[0]
-        self.rms_ps_mean = np.mean(rms_ps, axis=2)
-        self.rms_ps_std = np.std(rms_ps, axis=2)
-        return self.rms_ps_mean, self.rms_ps_std
+               rms_ps[:,:,i] = tools.compute_power_spec_perp_vs_par(
+                   randmap * self.map.w, (self.k_bin_edges_perp, self.k_bin_edges_par),
+                   dx=self.map.dx, dy=self.map.dy, dz=self.map.dz
+                   )[0]
+           self.rms_ps_mean = np.mean(rms_ps, axis=2)
+           self.rms_ps_std = np.std(rms_ps, axis=2)
+           return self.rms_ps_mean, self.rms_ps_std
+        if weights == False:
+           
+        
+           rms_ps = np.zeros((len(self.k_bin_edges_perp) - 1, len(self.k_bin_edges_par) - 1, n_sims))
+           for i in range(n_sims):
+               randmap = self.map.rms * np.random.randn(*self.map.rms.shape)
+
+               rms_ps[:,:,i] = tools.compute_power_spec_perp_vs_par(
+                   randmap, (self.k_bin_edges_perp, self.k_bin_edges_par),
+                   dx=self.map.dx, dy=self.map.dy, dz=self.map.dz
+                   )[0]
+           self.rms_ps_mean = np.mean(rms_ps, axis=2)
+           self.rms_ps_std = np.std(rms_ps, axis=2)
+           return self.rms_ps_mean, self.rms_ps_std
     
     def make_h5(self, outname=None):
         if outname is None:
