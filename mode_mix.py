@@ -123,7 +123,7 @@ error_bars = np.std(mode_mixing_tf, axis=0)
 fig = plt.figure()
 ax1 = fig.add_subplot(111)
 ax1.errorbar(k_arr[0],our_estimate, error_bars, color='black', fmt='o')
-ax1.set_ylabel(r'$\mathrm{P^{weights}(k)/P(k)}$', fontsize=14)
+ax1.set_ylabel(r'$\mathrm{\tilde{P}(k)/P(k)}$', fontsize=14)
 ax1.set_xlabel(r'$k$ [Mpc${}^{-1}$]', fontsize=14)
 labnums = [0.05,0.1, 0.2, 0.5]
 ax1.set_xlim(0.046,0.68)
