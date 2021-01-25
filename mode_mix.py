@@ -128,7 +128,7 @@ ax1.set_xlabel(r'$k$ [Mpc${}^{-1}$]', fontsize=14)
 labnums = [0.05,0.1, 0.2, 0.5]
 ax1.set_xlim(0.05,0.7)
 ax1.set_xscale('log')
-ax1.set_ylim(0.5,1.5)
+ax1.set_ylim(0.8,1.5)
 ax1.grid()
 ax1.set_xticks(labnums)
 ax1.get_xaxis().set_major_formatter(matplotlib.ticker.ScalarFormatter())
