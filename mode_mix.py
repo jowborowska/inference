@@ -49,7 +49,7 @@ ps_weights_arr = []
 ps_noweights_arr = []
 k_arr = []
 for i in range(10):
-   print (i, '. realization out of 10')
+   print (i+1, '. realization out of 10')
    src.tools.make_picklable((exp_params, mcmc_params))
    mcmc_params.observables = ('ps', 'vid')
    model, observables, _, map_obj = src.tools.set_up_mcmc(mcmc_params, exp_params)
@@ -85,11 +85,21 @@ for i in range(10):
    ps_noweights_arr.append(ps_no_weights)
    k_arr.append(k)
 
-mode_mixing_tf = ps_weights_arr/ps_noweights_arr
+np.save('ps_weights.npy',np.array(ps_weights_arr))
+np.save('ps_no_weights.npy',np.array(ps_noweights_arr))
+np.save('k_arr.npy',np.array(k_arr))
+
+ps_weights_arr = np.array(ps_weights_arr)
+ps_noweights_arr = np.array(ps_noweights_arr)
+k_arr = np.array(k_arr)
+mode_mixing_tf = np.zeros_like(ps_weights_arr)
+
+
 plt.figure()
 for i in range(10):
+   mode_mixing_tf[i] = ps_weights_arr[i]/ps_noweights_arr[i]
    plt.plot(k_arr[i], mode_mixing_tf[i])
-   plt.savefig('mode_mix.png')
+plt.savefig('mode_mix.png')
 
 
 
