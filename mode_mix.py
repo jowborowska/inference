@@ -133,6 +133,8 @@ ax1.grid()
 ax1.plot(k_arr[0], 0 * np.zeros_like(k_arr[0]) + 1, alpha=0.4, zorder=1, color='black')
 ax1.set_xticks(labnums)
 ax1.get_xaxis().set_major_formatter(matplotlib.ticker.ScalarFormatter())
+ax1.tick_params(axis="x", labelsize=12)
+ax1.tick_params(axis="y", labelsize=12)
 plt.tight_layout()
 plt.savefig('mode_mix2.pdf')
 
