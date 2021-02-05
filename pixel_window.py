@@ -28,7 +28,7 @@ import sys
 import importlib
 import h5py
 
-
+'''
 #I want to take signal and x, y from the simulated signal map
 signal_map_file = '/mn/stornext/d16/cmbco/comap/jowita/inference/notsmoothed_map.h5'
 with h5py.File(signal_map_file, mode="r") as my_file2:      
@@ -105,10 +105,33 @@ ps_low_arr= np.array(ps_low_arr)
 ps_high_arr = np.array(ps_high_arr)
 k_arr = np.array(k_arr)
 pixel_window = np.zeros_like(ps_low_arr)
+'''
+ps_low_arr= np.load('ps_low_res.npy')
+ps_high_arr = np.load('ps_high_res.npy')
+k_arr = np.load('k_arr.npy')
+pixel_window = np.zeros_like(ps_low_arr)
 
 for i in range(10):
    pixel_window[i] = ps_low_arr[i]/ps_high_arr[i]
-
-
 np.save('pixel_window.npy', pixel_window)
+
+pixel_window = np.mean(pixel_window, axis=0)
+ps_low_arr = np.mean(ps_low_arr, axis=0)
+ps_high_arr = np.mean(ps_high_arr, axis=0)
+
+plt.figure()
+pw = plt.imshow(pixel_window)
+plt.colorbar(pw)
+plt.savefig('pw.png')
+
+
+plt.figure()
+ps_low = plt.imshow(ps_low_arr)
+plt.colorbar(ps_low)
+plt.savefig('ps_low.png')
+
+plt.figure()
+ps_high = plt.imshow(ps_high_arr)
+plt.colorbar(ps_high)
+plt.savefig('ps_high.png')
 
