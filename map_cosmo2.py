@@ -40,7 +40,7 @@ class MapCosmo():
         dnu = 32.2e-3  # GHz
         nu_rest = 115  # GHz
         dz = (1 + z_mid) ** 2 * dnu / nu_rest  # conversion 
-        n_f = 256  # 64 * 4
+        n_f = 256*16  # 64 * 4 * 16
         redshift = np.linspace(z_mid - n_f/2*dz, z_mid + n_f/2*dz, n_f + 1)
 
 
