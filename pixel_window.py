@@ -116,8 +116,18 @@ for i in range(10):
 np.save('pixel_window.npy', pixel_window)
 
 pixel_window = np.mean(pixel_window, axis=0)
-ps_low_arr = np.mean(ps_low_arr, axis=0)
-ps_high_arr = np.mean(ps_high_arr, axis=0)
+ps_low_arr_mean = np.mean(ps_low_arr, axis=0)
+ps_high_arr_mean = np.mean(ps_high_arr, axis=0)
+
+plt.figure()
+psl1 = plt.imshow(ps_low_arr[1])
+plt.colorbar(psl1)
+plt.savefig('psl1.png')
+
+plt.figure()
+psh1 = plt.imshow(ps_high_arr[1])
+plt.colorbar(psh1)
+plt.savefig('psh1.png')
 
 plt.figure()
 pw = plt.imshow(pixel_window)
@@ -126,12 +136,12 @@ plt.savefig('pw.png')
 
 
 plt.figure()
-ps_low = plt.imshow(ps_low_arr)
+ps_low = plt.imshow(ps_low_arr_mean)
 plt.colorbar(ps_low)
 plt.savefig('ps_low.png')
 
 plt.figure()
-ps_high = plt.imshow(ps_high_arr)
+ps_high = plt.imshow(ps_high_arr_mean)
 plt.colorbar(ps_high)
 plt.savefig('ps_high.png')
 
