@@ -53,7 +53,9 @@ class MapCosmo():
         plt.figure()
         plt.imshow(self.map[0, :, :], interpolation='none')
         plt.savefig('maphigh.png')
-
+        plt.figure()
+        plt.imshow(self.map[0, :, 0:256], interpolation='none')
+        plt.savefig('maphigh_zoom.png')
  
         self.rms = self.rms.reshape((sh[0], sh[1], sh[2] * sh[3]*sh[4]))
         self.mask = np.zeros_like(self.rms)
