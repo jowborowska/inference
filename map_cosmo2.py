@@ -55,12 +55,12 @@ class MapCosmo():
 
         norm = mpl.colors.Normalize(vmin=0, vmax=4*1e9) 
         plt.figure(figsize=(8, 6))
-        map_high = plt.imshow(self.map[0, :, :], interpolation='none', aspect='auto', norm=norm)
+        map_high = plt.imshow(self.map[0, :, :], interpolation='none', aspect='auto')
         plt.colorbar(map_high)
         plt.savefig('maphigh.png')
 
         plt.figure(figsize=(8, 6))
-        map_high_zoom = plt.imshow(self.map[0, :, 0:256], interpolation='none', aspect='auto', norm=norm)
+        map_high_zoom = plt.imshow(self.map[0, :, 0:256], interpolation='none', aspect='auto')
         plt.colorbar(map_high_zoom)
         plt.savefig('maphigh_zoom.png')
  
