@@ -28,7 +28,7 @@ import sys
 import importlib
 import h5py
 
-'''
+
 #I want to take signal and x, y from the simulated signal map
 signal_map_file = '/mn/stornext/d16/cmbco/comap/jowita/inference/notsmoothed_map.h5'
 with h5py.File(signal_map_file, mode="r") as my_file2:      
@@ -36,7 +36,7 @@ with h5py.File(signal_map_file, mode="r") as my_file2:
    y = np.array(my_file2['y'][:])
    #signal_map = np.array(my_file2['map_beam'][:])
 
-
+no_of_realizations = 1
 mcmc_params = importlib.import_module('mc_cube')
 
 exp_params = importlib.import_module('exp_cube')
@@ -45,8 +45,8 @@ exp_params = importlib.import_module('exp_cube')
 ps_low_arr = []
 ps_high_arr = []
 k_arr = []
-for i in range(10):
-   print (i+1, '. realization out of 10')
+for i in range(no_of_realizations):
+   print (i+1, '. realization out of' + str(no_of_realizations))
    src.tools.make_picklable((exp_params, mcmc_params))
    mcmc_params.observables = ('ps', 'vid')
    model, observables, _, map_obj = src.tools.set_up_mcmc(mcmc_params, exp_params)
@@ -105,16 +105,32 @@ ps_low_arr= np.array(ps_low_arr)
 ps_high_arr = np.array(ps_high_arr)
 k_arr = np.array(k_arr)
 pixel_window = np.zeros_like(ps_low_arr)
-'''
+
 ps_low_arr= np.load('ps_low_res.npy')
 ps_high_arr = np.load('ps_high_res.npy')
 k_arr = np.load('k_arr.npy')
 pixel_window = np.zeros_like(ps_low_arr)
 
-for i in range(10):
+for i in range(no_of_realizations):
    pixel_window[i] = ps_low_arr[i]/ps_high_arr[i]
 np.save('pixel_window.npy', pixel_window)
 
+plt.figure()
+pw = plt.imshow(pixel_window)
+plt.colorbar(pw)
+plt.savefig('pw_new.png')
+
+plt.figure()
+psl1 = plt.imshow(ps_low_arr)
+plt.colorbar(psl1)
+plt.savefig('psl1_new.png')
+
+plt.figure()
+psh1 = plt.imshow(ps_high_arr)
+plt.colorbar(psh1)
+plt.savefig('psh1_new.png')
+
+'''
 pixel_window = np.mean(pixel_window, axis=0)
 ps_low_arr_mean = np.mean(ps_low_arr, axis=0)
 ps_high_arr_mean = np.mean(ps_high_arr, axis=0)
@@ -144,4 +160,4 @@ plt.figure()
 ps_high = plt.imshow(ps_high_arr_mean)
 plt.colorbar(ps_high)
 plt.savefig('ps_high.png')
-
+'''
