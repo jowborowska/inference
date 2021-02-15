@@ -54,7 +54,7 @@ class MapCosmo():
         plt.savefig('maplow.png')
 
         plt.figure(figsize=(8, 6))
-        map_low_zoom = plt.imshow(self.map[0, :, 0:16], interpolation='none')
+        map_low_zoom = plt.imshow(self.map[0, :, 0:16], interpolation='none', aspect='auto')
         plt.colorbar(map_low_zoom)
         plt.savefig('maplow_zoom.png')
        
