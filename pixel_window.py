@@ -112,13 +112,13 @@ k_arr = np.load('k_arr.npy')
 pixel_window = np.zeros_like(ps_low_arr)
 
 for i in range(no_of_realizations):
-   pixel_window[i] = ps_low_arr[i]/ps_high_arr[i]
+   pixel_window[i] = ps_high_arr[i]/ps_low_arr[i]
 np.save('pixel_window.npy', pixel_window)
 
 plt.figure()
 pw = plt.imshow(pixel_window[0])
 plt.colorbar(pw)
-plt.savefig('pw_new.png')
+plt.savefig('pw_new2.png')
 
 plt.figure()
 psl1 = plt.imshow(ps_low_arr[0])
