@@ -49,6 +49,8 @@ class MapCosmo():
                 
         sh = self.map.shape
         self.map = self.map.reshape((sh[0], sh[1], sh[2] * sh[3])) 
+
+        norm = mpl.colors.Normalize(vmin=0, vmax=4*1e9) 
         plt.figure(figsize=(8, 6))
         map_low = plt.imshow(self.map[0, :, :], interpolation='none', aspect='auto', norm=norm)
         plt.colorbar(map_low)
