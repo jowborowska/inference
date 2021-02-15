@@ -46,7 +46,7 @@ ps_low_arr = []
 ps_high_arr = []
 k_arr = []
 for i in range(no_of_realizations):
-   print (i+1, '. realization out of' + str(no_of_realizations))
+   print (str(i+1) + '. realization out of ' + str(no_of_realizations))
    src.tools.make_picklable((exp_params, mcmc_params))
    mcmc_params.observables = ('ps', 'vid')
    model, observables, _, map_obj = src.tools.set_up_mcmc(mcmc_params, exp_params)
@@ -116,17 +116,17 @@ for i in range(no_of_realizations):
 np.save('pixel_window.npy', pixel_window)
 
 plt.figure()
-pw = plt.imshow(pixel_window)
+pw = plt.imshow(pixel_window[0])
 plt.colorbar(pw)
 plt.savefig('pw_new.png')
 
 plt.figure()
-psl1 = plt.imshow(ps_low_arr)
+psl1 = plt.imshow(ps_low_arr[0])
 plt.colorbar(psl1)
 plt.savefig('psl1_new.png')
 
 plt.figure()
-psh1 = plt.imshow(ps_high_arr)
+psh1 = plt.imshow(ps_high_arr[0])
 plt.colorbar(psh1)
 plt.savefig('psh1_new.png')
 
