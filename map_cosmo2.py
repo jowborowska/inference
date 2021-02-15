@@ -3,6 +3,7 @@
 import numpy as np
 import h5py
 import tools_ps as tools
+import matplotlib as mpl
 import matplotlib.pyplot as plt
 
 class MapCosmo():
@@ -50,13 +51,16 @@ class MapCosmo():
                 
         sh = self.map.shape
         self.map = self.map.reshape((sh[0], sh[1], sh[2] * sh[3]*sh[4]))
+
+
+        norm = mpl.colors.Normalize(vmin=0, vmax=4*1e9) 
         plt.figure(figsize=(8, 6))
-        map_high = plt.imshow(self.map[0, :, :], interpolation='none', aspect='auto')
+        map_high = plt.imshow(self.map[0, :, :], interpolation='none', aspect='auto', norm=norm)
         plt.colorbar(map_high)
         plt.savefig('maphigh.png')
 
         plt.figure(figsize=(8, 6))
-        map_high_zoom = plt.imshow(self.map[0, :, 0:256], interpolation='none', aspect='auto')
+        map_high_zoom = plt.imshow(self.map[0, :, 0:256], interpolation='none', aspect='auto', norm=norm)
         plt.colorbar(map_high_zoom)
         plt.savefig('maphigh_zoom.png')
  

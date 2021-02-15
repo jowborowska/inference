@@ -1,6 +1,7 @@
 import numpy as np
 import h5py
 import tools_ps as tools
+import matplotlib as mpl
 import matplotlib.pyplot as plt
 
 class MapCosmo():
@@ -49,12 +50,12 @@ class MapCosmo():
         sh = self.map.shape
         self.map = self.map.reshape((sh[0], sh[1], sh[2] * sh[3])) 
         plt.figure(figsize=(8, 6))
-        map_low = plt.imshow(self.map[0, :, :], interpolation='none', aspect='auto')
+        map_low = plt.imshow(self.map[0, :, :], interpolation='none', aspect='auto', norm=norm)
         plt.colorbar(map_low)
         plt.savefig('maplow.png')
 
         plt.figure(figsize=(8, 6))
-        map_low_zoom = plt.imshow(self.map[0, :, 0:16], interpolation='none', aspect='auto')
+        map_low_zoom = plt.imshow(self.map[0, :, 0:16], interpolation='none', aspect='auto', norm=norm)
         plt.colorbar(map_low_zoom)
         plt.savefig('maplow_zoom.png')
        
