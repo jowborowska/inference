@@ -49,7 +49,8 @@ class MapCosmo():
         sh = self.map.shape
         self.map = self.map.reshape((sh[0], sh[1], sh[2] * sh[3])) 
         plt.figure()
-        plt.imshow(self.map[0, :, :], interpolation='none')
+        map_low = plt.imshow(self.map[0, :, :], interpolation='none')
+        plt.colorbar(map_low)
         plt.savefig('maplow.png')
        
         self.rms = self.rms.reshape((sh[0], sh[1], sh[2] * sh[3]))

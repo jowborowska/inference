@@ -51,10 +51,13 @@ class MapCosmo():
         sh = self.map.shape
         self.map = self.map.reshape((sh[0], sh[1], sh[2] * sh[3]*sh[4]))
         plt.figure()
-        plt.imshow(self.map[0, :, :], interpolation='none')
+        map_high = plt.imshow(self.map[0, :, :], interpolation='none')
+        plt.colorbar(map_high)
         plt.savefig('maphigh.png')
+
         plt.figure()
-        plt.imshow(self.map[0, :, 0:256], interpolation='none')
+        map_high_zoom = plt.imshow(self.map[0, :, 0:256], interpolation='none')
+        plt.colorbar(map_high_zoom)
         plt.savefig('maphigh_zoom.png')
  
         self.rms = self.rms.reshape((sh[0], sh[1], sh[2] * sh[3]*sh[4]))
