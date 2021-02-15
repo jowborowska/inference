@@ -58,6 +58,7 @@ for i in range(no_of_realizations):
    my_map_low_res = my_map1.reshape(sh[0], sh[1], 4, 64, 16).mean(4) #high resolution frequency to low resolution freq. !this is what I need for pixel window
    my_map_low_res = my_map_low_res.transpose(2, 3, 0, 1) #{4, 64, 120, 120}
    '''
+   #this was moved to map_cosmo
    plt.figure()
    plt.imshow(my_map_low_res[2, :, :, 0].T, interpolation='none')
    plt.savefig('maplow.png')
@@ -65,6 +66,7 @@ for i in range(no_of_realizations):
    my_map_high_res = my_map2.reshape(sh[0], sh[1], 4, 64, 16)
    my_map_high_res = my_map_high_res.transpose(2, 3, 4, 0, 1) #{4, 64, 16, 120, 120}
    '''
+   #this was moved to map_cosmo2
    plt.figure()
    plt.imshow(my_map_high_res[2, :, 0,:, 0].T, interpolation='none')
    plt.savefig('maphigh.png')
@@ -78,16 +80,16 @@ for i in range(no_of_realizations):
    #Create a map file
    outname = 'sim_signal_low_res.h5'
    f = h5py.File(outname, 'w') 
-   f.create_dataset('x', data=x)
-   f.create_dataset('y', data=y)
+   f.create_dataset('x', data=map_obj.pix_bincents_x) #<-----------i changed these from data=x
+   f.create_dataset('y', data=map_obj.pix_bincents_y) #<-----------i changed these from data=y
    f.create_dataset('map_coadd', data=signal_map_low_res)
    f.create_dataset('rms_coadd', data=rms_low_res)
    f.close()
 
    outname = 'sim_signal_high_res.h5'
    f = h5py.File(outname, 'w') 
-   f.create_dataset('x', data=x)
-   f.create_dataset('y', data=y)
+   f.create_dataset('x', data=map_obj.pix_bincents_x) #<-----------i changed these from data=x
+   f.create_dataset('y', data=map_obj.pix_bincents_y) #<-----------i changed these from data=y
    f.create_dataset('map_coadd', data=signal_map_high_res)
    f.create_dataset('rms_coadd', data=rms_high_res)
    f.close()
