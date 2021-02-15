@@ -1,6 +1,7 @@
 import numpy as np
 import h5py
 import tools_ps as tools
+import matplotlib.pyplot as plt
 
 class MapCosmo():
     def __init__(self, mappath, feed=None, jk=None, split=None):
