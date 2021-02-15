@@ -57,16 +57,18 @@ for i in range(no_of_realizations):
    sh = my_map1.shape
    my_map_low_res = my_map1.reshape(sh[0], sh[1], 4, 64, 16).mean(4) #high resolution frequency to low resolution freq. !this is what I need for pixel window
    my_map_low_res = my_map_low_res.transpose(2, 3, 0, 1) #{4, 64, 120, 120}
+   '''
    plt.figure()
    plt.imshow(my_map_low_res[2, :, :, 0].T, interpolation='none')
    plt.savefig('maplow.png')
-
+   '''
    my_map_high_res = my_map2.reshape(sh[0], sh[1], 4, 64, 16)
    my_map_high_res = my_map_high_res.transpose(2, 3, 4, 0, 1) #{4, 64, 16, 120, 120}
+   '''
    plt.figure()
    plt.imshow(my_map_high_res[2, :, 0,:, 0].T, interpolation='none')
    plt.savefig('maphigh.png')
-
+   '''
    signal_map_low_res = my_map_low_res
    signal_map_high_res = my_map_high_res
    #signal_maps.append(signal_map)

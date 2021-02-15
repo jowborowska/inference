@@ -48,7 +48,12 @@ class MapCosmo():
         self.rms = self.rms.transpose(4, 3, 0, 1, 2) * K2muK
                 
         sh = self.map.shape
-        self.map = self.map.reshape((sh[0], sh[1], sh[2] * sh[3]*sh[4])) 
+        self.map = self.map.reshape((sh[0], sh[1], sh[2] * sh[3]*sh[4]))
+        plt.figure()
+        plt.imshow(self.map[0, :, :], interpolation='none')
+        plt.savefig('maphigh.png')
+
+ 
         self.rms = self.rms.reshape((sh[0], sh[1], sh[2] * sh[3]*sh[4]))
         self.mask = np.zeros_like(self.rms)
         self.mask[(self.rms != 0.0)] = 1.0

@@ -47,6 +47,10 @@ class MapCosmo():
                 
         sh = self.map.shape
         self.map = self.map.reshape((sh[0], sh[1], sh[2] * sh[3])) 
+        plt.figure()
+        plt.imshow(self.map[0, :, :], interpolation='none')
+        plt.savefig('maplow.png')
+       
         self.rms = self.rms.reshape((sh[0], sh[1], sh[2] * sh[3]))
         self.mask = np.zeros_like(self.rms)
         self.mask[(self.rms != 0.0)] = 1.0
