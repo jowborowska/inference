@@ -194,6 +194,7 @@ plt.savefig('psh1_new.png')
 
 plot_ps(ps_low_arr[0], 'pslow.png')
 plot_ps(ps_high_arr[0], 'pshigh.png')
+plot_ps(ps_low_arr[0]/ps_high_arr[0], 'pwindow.png')
 '''
 pixel_window = np.mean(pixel_window, axis=0)
 ps_low_arr_mean = np.mean(ps_low_arr, axis=0)
