@@ -107,7 +107,7 @@ for i in range(no_of_realizations):
    ps_high_arr.append(ps_high)
    k_arr.append(k)
 
-def plot_ps(pw=False, ps_2d, titlename, titlee):
+def plot_ps(ps_2d, titlename, titlee, pw=False):
    fig, ax = plt.subplots(1,1)
    if pw == True: 
       img = ax.imshow(ps_2d, interpolation='none', origin='lower', extent=[0,1,0,1])
@@ -201,7 +201,7 @@ plt.savefig('psh1_new.png')
 '''
 plot_ps(ps_low_arr[0], 'pslow.png', 'Low freq resolution')
 plot_ps(ps_high_arr[0], 'pshigh.png', 'High freq resolution')
-plot_ps(pw=True, ps_low_arr[0]/ps_high_arr[0], 'pwindow.png', 'Pixel window')
+plot_ps(ps_low_arr[0]/ps_high_arr[0], 'pwindow.png', 'Pixel window', pw=True)
 '''
 pixel_window = np.mean(pixel_window, axis=0)
 ps_low_arr_mean = np.mean(ps_low_arr, axis=0)
