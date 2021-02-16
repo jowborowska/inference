@@ -22,7 +22,7 @@ class PowerSpectrum():
 
         if weights == True:
            if not self.weights_are_normalized: self.normalize_weights()
-           if do_2d: #to get 2d PS surface
+           if do_2d == True: #to get 2d PS surface
                self.k_bin_edges_par = np.logspace(-2.0, np.log10(1.0), n_k)
                self.k_bin_edges_perp = np.logspace(-2.0 + np.log10(2), np.log10(1.5), n_k)
             
@@ -31,7 +31,7 @@ class PowerSpectrum():
                    dx=self.map.dx, dy=self.map.dy, dz=self.map.dz
                )
                return self.ps_2d, self.k, self.nmodes
-           else:
+           if do_2d == False:
                self.k_bin_edges = np.logspace(-2.0, np.log10(1.5), n_k)
                self.ps, self.k, self.nmodes = tools.compute_power_spec3d(
                    self.map.map * self.map.w, self.k_bin_edges,
