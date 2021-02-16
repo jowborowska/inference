@@ -107,12 +107,18 @@ for i in range(no_of_realizations):
    ps_high_arr.append(ps_high)
    k_arr.append(k)
 
-def plot_ps(ps_2d, titlename):
+def plot_ps(pw=False, ps_2d, titlename, titlee):
    fig, ax = plt.subplots(1,1)
-   img = ax.imshow(np.log10(ps_2d), interpolation='none', origin='lower', extent=[0,1,0,1])
+   if pw == True: 
+      img = ax.imshow(ps_2d, interpolation='none', origin='lower', extent=[0,1,0,1])
+   else:
+      img = ax.imshow(np.log10(ps_2d), interpolation='none', origin='lower', extent=[0,1,0,1])
    #plt.imshow(np.log10(nmodes), interpolation='none', origin='lower')
    cbar = fig.colorbar(img)
-   cbar.set_label(r'$\log_{10}(\tilde{P}_{\parallel, \bot}(k))$ [$\mu$K${}^2$ (Mpc)${}^3$]')
+   if pw==True:
+      cbar.set_label(r'$\log_{10}(\tilde{P}_{\parallel, \bot}(k))$ [$\mu$K${}^2$ (Mpc)${}^3$]')
+   if pw==False:
+      cbar.set_label(r'$\tilde{P}_{\parallel, \bot}(k)$ [$\mu$K${}^2$ (Mpc)${}^3$]')
 
    def log2lin(x, k_edges):
        loglen = np.log10(k_edges[-1]) - np.log10(k_edges[0])
@@ -155,6 +161,7 @@ def plot_ps(ps_2d, titlename):
    plt.xlim(0, 1)
    plt.ylim(0, 1)
    #plt.savefig('ps_par_vs_perp_nmodes.png')
+   plt.title(titlee, fontsize=12)
    plt.savefig(titlename)
    #plt.show()
 
@@ -172,7 +179,7 @@ ps_low_arr= np.load('ps_low_res.npy')
 ps_high_arr = np.load('ps_high_res.npy')
 k_arr = np.load('k_arr.npy')
 pixel_window = np.zeros_like(ps_low_arr)
-
+'''
 for i in range(no_of_realizations):
    pixel_window[i] = ps_low_arr[i]/ps_high_arr[i]
 np.save('pixel_window.npy', pixel_window)
@@ -191,10 +198,10 @@ plt.figure()
 psh1 = plt.imshow(ps_high_arr[0])
 plt.colorbar(psh1)
 plt.savefig('psh1_new.png')
-
-plot_ps(ps_low_arr[0], 'pslow.png')
-plot_ps(ps_high_arr[0], 'pshigh.png')
-plot_ps(ps_low_arr[0]/ps_high_arr[0], 'pwindow.png')
+'''
+plot_ps(ps_low_arr[0], 'pslow.png', 'Low freq resolution')
+plot_ps(ps_high_arr[0], 'pshigh.png', 'High freq resolution')
+plot_ps(pw=True, ps_low_arr[0]/ps_high_arr[0], 'pwindow.png', 'Pixel window')
 '''
 pixel_window = np.mean(pixel_window, axis=0)
 ps_low_arr_mean = np.mean(ps_low_arr, axis=0)
