@@ -57,7 +57,7 @@ class PowerSpectrum():
                )
                return self.ps, self.k, self.nmodes
     
-    def run_noise_sims(self,weights=True, n_sims=10): #only white noise here
+    def run_noise_sims_2d(self,weights=True, n_sims=10): #only white noise here
         if weights == True:
            if not self.weights_are_normalized: self.normalize_weights()
         
@@ -86,7 +86,23 @@ class PowerSpectrum():
            self.rms_ps_mean = np.mean(rms_ps, axis=2)
            self.rms_ps_std = np.std(rms_ps, axis=2)
            return self.rms_ps_mean, self.rms_ps_std
-    
+   
+    def run_noise_sims(self, n_sims):
+        if not self.weights_are_normalized: self.normalize_weights()
+        
+        rms_ps = np.zeros((len(self.k_bin_edges) - 1, n_sims))
+        for i in range(n_sims):
+            randmap = self.map.rms * np.random.randn(*self.map.rms.shape)
+
+            rms_ps[:, i] = tools.compute_power_spec3d(
+                randmap * self.map.w, self.k_bin_edges,
+                dx=self.map.dx, dy=self.map.dy, dz=self.map.dz
+                )[0]
+        self.rms_ps_mean = np.mean(rms_ps, axis=1)
+        self.rms_ps_std = np.std(rms_ps, axis=1)
+        return self.rms_ps_mean, self.rms_ps_std
+
+
     def make_h5(self, outname=None):
         if outname is None:
             #folder = '/mn/stornext/d16/cmbco/comap/protodir/spectra/'

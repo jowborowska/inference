@@ -38,8 +38,8 @@ map_paths_notsmooth = ['notsmoothed_map.h5','notsmoothed_map2.h5','notsmoothed_m
 for mappath in map_paths_notsmooth:
    my_map = map_cosmo.MapCosmo(mappath)
    my_ps = power_spectrum.PowerSpectrum(my_map)
-   ps_2d, k, nmodes = my_ps.calculate_ps(do_2d=True)
-   rms_ps_mean, rms_ps_std = my_ps.run_noise_sims(10)
+   ps_2d, k, nmodes = my_ps.calculate_ps(do_2d=False) #change to True for 2D!
+   rms_ps_mean, rms_ps_std = my_ps.run_noise_sims(10) #change to run_noise_sims_2d for 2D!
    single_ps_notsmooth.append(ps_2d)
    single_sigma_notsmooth.append(rms_ps_std)
    my_ps.make_h5()
@@ -84,8 +84,8 @@ np.save('ps_smooth_single.npy', ps_smooth)
 np.save('ps_notsmooth_single.npy', ps_notsmooth)
 np.save('smooth_mean.npy', smooth_mean)
 np.save('notsmooth_mean.npy', notsmooth_mean)
-np.save('ps_2d_smooth.npy', ps_smooth)      
-np.save('ps_2d_notsmooth.npy', ps_notsmooth)   
+np.save('ps_1d_smooth.npy', ps_smooth)      
+np.save('ps_1d_notsmooth.npy', ps_notsmooth)   
 np.save('k_smooth.npy', k_smooth)
 np.save('k_notsmooth.npy', k_notsmooth)
 
