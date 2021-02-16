@@ -115,9 +115,9 @@ def plot_ps(ps_2d, titlename, titlee, pw=False):
       img = ax.imshow(np.log10(ps_2d), interpolation='none', origin='lower', extent=[0,1,0,1])
    #plt.imshow(np.log10(nmodes), interpolation='none', origin='lower')
    cbar = fig.colorbar(img)
-   if pw==True:
-      cbar.set_label(r'$\log_{10}(\tilde{P}_{\parallel, \bot}(k))$ [$\mu$K${}^2$ (Mpc)${}^3$]')
    if pw==False:
+      cbar.set_label(r'$\log_{10}(\tilde{P}_{\parallel, \bot}(k))$ [$\mu$K${}^2$ (Mpc)${}^3$]')
+   if pw==True:
       cbar.set_label(r'$\tilde{P}_{\parallel, \bot}(k)$ [$\mu$K${}^2$ (Mpc)${}^3$]')
 
    def log2lin(x, k_edges):
