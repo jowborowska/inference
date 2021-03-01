@@ -56,11 +56,12 @@ for i in range(no_of_realizations):
    my_map2 = map_obj.map
    sh = my_map1.shape
    #this part added to check the normalization
+   '''
    muK2K = 1e-6 #micro Kelvins to Kelvins
    rms_map = 10.*muK2K + 10.*np.random.uniform(0.0, 1.*muK2K, sh)
    my_map1 = rms_map
    my_map2 = rms_map
-
+   '''
    #end of this part
    my_map_low_res = my_map1.reshape(sh[0], sh[1], 4, 64, 16).mean(4) #high resolution frequency to low resolution freq. !this is what I need for pixel window
    my_map_low_res = my_map_low_res.transpose(2, 3, 0, 1) #{4, 64, 120, 120}
@@ -206,9 +207,9 @@ psh1 = plt.imshow(ps_high_arr[0])
 plt.colorbar(psh1)
 plt.savefig('psh1_new.png')
 '''
-plot_ps(ps_low_arr[0], 'pslow_wn.png', 'Low freq resolution, white noise')
-plot_ps(ps_high_arr[0], 'pshigh_wn.png', 'High freq resolution, white noise')
-plot_ps(ps_low_arr[0]/ps_high_arr[0], 'pwindow_wn.png', 'Pixel window, white noise', pw=True)
+plot_ps(ps_low_arr[0], 'pslow.png', 'Low freq resolution')
+plot_ps(ps_high_arr[0], 'pshigh.png', 'High freq resolution')
+plot_ps(ps_low_arr[0]/ps_high_arr[0], 'pwindow.png', 'Pixel window', pw=True)
 '''
 pixel_window = np.mean(pixel_window, axis=0)
 ps_low_arr_mean = np.mean(ps_low_arr, axis=0)
