@@ -36,7 +36,7 @@ with h5py.File(signal_map_file, mode="r") as my_file2:
    y = np.array(my_file2['y'][:])
    #signal_map = np.array(my_file2['map_beam'][:])
 
-no_of_realizations = 1
+no_of_realizations = 10
 mcmc_params = importlib.import_module('mc_cube')
 
 exp_params = importlib.import_module('exp_cube')
@@ -181,17 +181,18 @@ np.save('k_arr.npy',np.array(k_arr))
 ps_low_arr= np.array(ps_low_arr)
 ps_high_arr = np.array(ps_high_arr)
 k_arr = np.array(k_arr)
-pixel_window = np.zeros_like(ps_low_arr)
+#pixel_window = np.zeros_like(ps_low_arr)
 
 ps_low_arr= np.load('ps_low_res.npy')
 ps_high_arr = np.load('ps_high_res.npy')
 k_arr = np.load('k_arr.npy')
 pixel_window = np.zeros_like(ps_low_arr)
-'''
+
 for i in range(no_of_realizations):
    pixel_window[i] = ps_low_arr[i]/ps_high_arr[i]
+pixel_window = np.mean(pixel_window, axis=0)
 np.save('pixel_window.npy', pixel_window)
-
+'''
 plt.figure()
 pw = plt.imshow(pixel_window[0])
 plt.colorbar(pw)
@@ -210,6 +211,7 @@ plt.savefig('psh1_new.png')
 plot_ps(ps_low_arr[0], 'pslow.png', 'Low freq resolution')
 plot_ps(ps_high_arr[0], 'pshigh.png', 'High freq resolution')
 plot_ps(ps_low_arr[0]/ps_high_arr[0], 'pwindow.png', 'Pixel window', pw=True)
+plot_ps(pixel_window, 'pwindow_mean.png', 'Pixel window, 10 signal realizations', pw=True)
 '''
 pixel_window = np.mean(pixel_window, axis=0)
 ps_low_arr_mean = np.mean(ps_low_arr, axis=0)
