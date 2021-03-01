@@ -208,10 +208,10 @@ psh1 = plt.imshow(ps_high_arr[0])
 plt.colorbar(psh1)
 plt.savefig('psh1_new.png')
 '''
-plot_ps(ps_low_arr[0], 'pslow.png', 'Low freq resolution')
-plot_ps(ps_high_arr[0], 'pshigh.png', 'High freq resolution')
+plot_ps(np.mean(ps_low_arr, axis=0), 'pslow.png', 'Low freq resolution, mean from 10 signal realizations')
+plot_ps(np.mean(ps_high_arr, axis=0), 'pshigh.png', 'High freq resolution, mean from 10 signal realizations')
 plot_ps(ps_low_arr[0]/ps_high_arr[0], 'pwindow.png', 'Pixel window', pw=True)
-plot_ps(pixel_window, 'pwindow_mean.png', 'Pixel window, 10 signal realizations', pw=True)
+plot_ps(pixel_window, 'pwindow_mean.png', 'Pixel window, mean from 10 signal realizations', pw=True)
 '''
 pixel_window = np.mean(pixel_window, axis=0)
 ps_low_arr_mean = np.mean(ps_low_arr, axis=0)
