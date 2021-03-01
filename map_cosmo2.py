@@ -39,7 +39,7 @@ class MapCosmo():
         dz2mpc = 699.62 / h # redshift 2.4 to 3.4
         K2muK = 1e6
         z_mid = 2.9
-        dnu = 32.2e-3  # GHz
+        dnu = 32.2e-3/16.  # GHz, I divided this with 16
         nu_rest = 115  # GHz
         dz = (1 + z_mid) ** 2 * dnu / nu_rest  # conversion 
         n_f = 256*16  # 64 * 4 * 16
