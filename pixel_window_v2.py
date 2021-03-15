@@ -39,7 +39,7 @@ with h5py.File(signal_map_file, mode="r") as my_file2:
    y = np.array(my_file2['y'][:])
    #signal_map = np.array(my_file2['map_beam'][:])
 
-no_of_realizations = 10
+no_of_realizations = 15
 mcmc_params = importlib.import_module('mc_cube')
 
 exp_params = importlib.import_module('exp_cube')
@@ -202,7 +202,7 @@ k_arr = np.load('k_arr.npy')
 pixel_window = np.zeros_like(ps_low_arr)
 
 for i in range(no_of_realizations):
-   pixel_window[i] = ps_high_arr[i]/ps_low_arr[i]
+   pixel_window[i] = ps_high_arr[i]/ps_low_arr[i] #should be low/high ? I think high/low is correct
 pixel_window = np.mean(pixel_window, axis=0)
 np.save('pixel_window.npy', pixel_window)
 
