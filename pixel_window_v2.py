@@ -202,7 +202,7 @@ k_arr = np.load('k_arr.npy')
 pixel_window = np.zeros_like(ps_low_arr)
 
 for i in range(no_of_realizations):
-   pixel_window[i] = ps_low_arr[i]/ps_high_arr[i]
+   pixel_window[i] = ps_high_arr[i]/ps_low_arr[i]
 pixel_window = np.mean(pixel_window, axis=0)
 np.save('pixel_window.npy', pixel_window)
 '''
