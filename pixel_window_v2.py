@@ -205,6 +205,8 @@ for i in range(no_of_realizations):
    pixel_window[i] = ps_high_arr[i]/ps_low_arr[i]
 pixel_window = np.mean(pixel_window, axis=0)
 np.save('pixel_window.npy', pixel_window)
+
+
 '''
 plt.figure()
 pw = plt.imshow(pixel_window[0])
@@ -224,7 +226,8 @@ plt.savefig('psh1_new.png')
 plot_ps(np.mean(ps_low_arr, axis=0), 'pslow.png', 'Low freq resolution, mean from 10 signal realizations')
 plot_ps(np.mean(ps_high_arr, axis=0), 'pshigh.png', 'High freq resolution, mean from 10 signal realizations')
 plot_ps(ps_low_arr[0]/ps_high_arr[0], 'pwindow.png', 'Pixel window', pw=True)
-plot_ps(pixel_window, 'pwindow_mean.png', 'Pixel window, mean from 10 signal realizations', pw=True)
+plot_ps(pixel_window, 'pwindow_mean_v1.png', 'Pixel window, mean from 10 signal realizations', pw=True)
+plot_ps(1./pixel_window, 'pwindow_mean_v2.png', 'Pixel window, mean from 10 signal realizations', pw=True)
 '''
 pixel_window = np.mean(pixel_window, axis=0)
 ps_low_arr_mean = np.mean(ps_low_arr, axis=0)
