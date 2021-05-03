@@ -46,6 +46,7 @@ exp_params = importlib.import_module('exp_cube')
 ps_low_arr = []
 ps_high_arr = []
 k_arr = []
+'''
 for i in range(no_of_realizations):
    print (str(i+1) + '. realization out of ' + str(no_of_realizations))
    src.tools.make_picklable((exp_params, mcmc_params))
@@ -58,30 +59,14 @@ for i in range(no_of_realizations):
    my_map1 = map_obj.map
    my_map2 = map_obj.map
    sh = my_map1.shape
-   #this part added to check the normalization
-   '''
-   muK2K = 1e-6 #micro Kelvins to Kelvins
-   rms_map = 10.*muK2K + 10.*np.random.uniform(0.0, 1.*muK2K, sh)
-   my_map1 = rms_map
-   my_map2 = rms_map
-   '''
-   #end of this part
+   
+
    my_map_low_res = my_map1.reshape(sh[0], sh[1], 4, 64, 16).mean(4) #high resolution frequency to low resolution freq. !this is what I need for pixel window
    my_map_low_res = my_map_low_res.transpose(2, 3, 0, 1) #{4, 64, 120, 120}
-   '''
-   #this was moved to map_cosmo
-   plt.figure()
-   plt.imshow(my_map_low_res[2, :, :, 0].T, interpolation='none')
-   plt.savefig('maplow.png')
-   '''
+
    my_map_high_res = my_map2.reshape(sh[0], sh[1], 4, 64, 16)
    my_map_high_res = my_map_high_res.transpose(2, 3, 4, 0, 1) #{4, 64, 16, 120, 120}
-   '''
-   #this was moved to map_cosmo2
-   plt.figure()
-   plt.imshow(my_map_high_res[2, :, 0,:, 0].T, interpolation='none')
-   plt.savefig('maphigh.png')
-   '''
+ 
    signal_map_low_res = my_map_low_res
    signal_map_high_res = my_map_high_res
    #signal_maps.append(signal_map)
@@ -120,7 +105,7 @@ for i in range(no_of_realizations):
    ps_high, k, nmodes = my_ps_high_res.calculate_ps(do_2d=True, weights=True)
    ps_high_arr.append(ps_high)
    k_arr.append(k)
-
+'''
 def plot_ps(ps_2d, titlename, titlee, pw=False):
    fig, ax = plt.subplots(1,1)
    if pw == True: 
@@ -179,7 +164,7 @@ def plot_ps(ps_2d, titlename, titlee, pw=False):
    plt.savefig(titlename)
    #plt.show()
 
-
+'''#uncomment this and for loop if you want a new run
 np.save('ps_low_res_v3.npy',np.array(ps_low_arr))
 np.save('ps_high_res_v3.npy',np.array(ps_high_arr))
 np.save('k_arr_v3.npy',np.array(k_arr))
@@ -188,14 +173,14 @@ ps_low_arr= np.array(ps_low_arr)
 ps_high_arr = np.array(ps_high_arr)
 k_arr = np.array(k_arr)
 #pixel_window = np.zeros_like(ps_low_arr)
-
+'''
 ps_low_arr= np.load('ps_low_res_v3.npy')
 ps_high_arr = np.load('ps_high_res_v3.npy')
 k_arr = np.load('k_arr_v3.npy')
 pixel_window = np.zeros_like(ps_low_arr)
 
 for i in range(no_of_realizations):
-   pixel_window[i] = ps_low_arr[i]/ps_high_arr[i]
+   pixel_window[i] = ps_high_arr[i]/ps_low_arr[i]
 pixel_window = np.mean(pixel_window, axis=0)
 np.save('pixel_window_v3.npy', pixel_window)
 '''
