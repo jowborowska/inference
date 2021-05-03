@@ -37,7 +37,7 @@ with h5py.File(signal_map_file, mode="r") as my_file2:
    y = np.array(my_file2['y'][:])
    #signal_map = np.array(my_file2['map_beam'][:])
 
-no_of_realizations = 10
+no_of_realizations = 3
 mcmc_params = importlib.import_module('mc_cube')
 
 exp_params = importlib.import_module('exp_cube')
@@ -53,7 +53,7 @@ for i in range(no_of_realizations):
    model, observables, _, map_obj = src.tools.set_up_mcmc(mcmc_params, exp_params)
    model_params = [-2.75, 0.05, 10.61, 12.3, 0.42]   # realistic model
    #map_obj.map, map_obj.lum_func = model.generate_map(model_params)
-   map_obj.map, map_obj.lum_func = src.tools.create_smoothed_map(model, model_params) #will be smoothed out in all directions
+   map_obj.map, map_obj.lum_func = src.tools.create_smoothed_map_3d(model, model_params) #will be smoothed out in all directions
    print ("Model map created.")
    my_map1 = map_obj.map
    my_map2 = map_obj.map
@@ -217,7 +217,7 @@ plt.savefig('psh1_new.png')
 plot_ps(np.mean(ps_low_arr, axis=0), 'pslow_v3.png', 'Low freq resolution, mean from 10 signal realizations')
 plot_ps(np.mean(ps_high_arr, axis=0), 'pshigh_v3.png', 'High freq resolution, mean from 10 signal realizations')
 plot_ps(ps_low_arr[0]/ps_high_arr[0], 'pwindow_v3.png', 'Pixel window', pw=True)
-plot_ps(pixel_window, 'pwindow_mean_v3.png', 'Pixel window, mean from 10 signal realizations', pw=True)
+plot_ps(pixel_window, 'pwindow_mean_v3.png', 'Pixel window, mean from 3 signal realizations', pw=True)
 '''
 pixel_window = np.mean(pixel_window, axis=0)
 ps_low_arr_mean = np.mean(ps_low_arr, axis=0)
