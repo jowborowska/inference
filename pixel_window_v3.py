@@ -54,6 +54,7 @@ for i in range(no_of_realizations):
    model_params = [-2.75, 0.05, 10.61, 12.3, 0.42]   # realistic model
    #map_obj.map, map_obj.lum_func = model.generate_map(model_params)
    map_obj.map, map_obj.lum_func = src.tools.create_smoothed_map(model, model_params) #will be smoothed out in all directions
+   print ("Model map created.")
    my_map1 = map_obj.map
    my_map2 = map_obj.map
    sh = my_map1.shape
@@ -106,8 +107,11 @@ for i in range(no_of_realizations):
 
    #Calculate PS with weights
    my_map_low_res = map_cosmo.MapCosmo('sim_signal_low_res.h5')
+   print ("Map cosmo 1.")
    my_ps_low_res = power_spectrum.PowerSpectrum(my_map_low_res)
+   print ("PS 1.")
    ps_low, k, nmodes = my_ps_low_res.calculate_ps(do_2d=True, weights=True)
+   print ("PS 2.")
    ps_low_arr.append(ps_low)
    #rms_ps_mean, rms_ps_std = my_ps.run_noise_sims(weights=True, n_sims=50)
    #my_ps.make_h5()
