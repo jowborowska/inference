@@ -53,7 +53,7 @@ for i in range(no_of_realizations):
    model, observables, _, map_obj = src.tools.set_up_mcmc(mcmc_params, exp_params)
    model_params = [-2.75, 0.05, 10.61, 12.3, 0.42]   # realistic model
    #map_obj.map, map_obj.lum_func = model.generate_map(model_params)
-   map_obj.map, map_obj.lum_func = src.tools.create_smoothed_map_3d(model, model_params) #will be smoothed out in all directions
+   map_obj.map, map_obj.lum_func = src.tools.create_smoothed_map(model, model_params) #will be smoothed out in all directions
    my_map1 = map_obj.map
    my_map2 = map_obj.map
    sh = my_map1.shape
