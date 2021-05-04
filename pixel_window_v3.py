@@ -37,7 +37,7 @@ with h5py.File(signal_map_file, mode="r") as my_file2:
    y = np.array(my_file2['y'][:])
    #signal_map = np.array(my_file2['map_beam'][:])
 
-no_of_realizations = 3
+no_of_realizations = 10
 mcmc_params = importlib.import_module('mc_cube')
 
 exp_params = importlib.import_module('exp_cube')
@@ -46,7 +46,7 @@ exp_params = importlib.import_module('exp_cube')
 ps_low_arr = []
 ps_high_arr = []
 k_arr = []
-'''
+
 for i in range(no_of_realizations):
    print (str(i+1) + '. realization out of ' + str(no_of_realizations))
    src.tools.make_picklable((exp_params, mcmc_params))
@@ -105,7 +105,7 @@ for i in range(no_of_realizations):
    ps_high, k, nmodes = my_ps_high_res.calculate_ps(do_2d=True, weights=True)
    ps_high_arr.append(ps_high)
    k_arr.append(k)
-'''
+
 def plot_ps(ps_2d, titlename, titlee, pw=False):
    fig, ax = plt.subplots(1,1)
    if pw == True: 
@@ -164,7 +164,7 @@ def plot_ps(ps_2d, titlename, titlee, pw=False):
    plt.savefig(titlename)
    #plt.show()
 
-'''#uncomment this and for loop if you want a new run
+
 np.save('ps_low_res_v3.npy',np.array(ps_low_arr))
 np.save('ps_high_res_v3.npy',np.array(ps_high_arr))
 np.save('k_arr_v3.npy',np.array(k_arr))
@@ -173,14 +173,14 @@ ps_low_arr= np.array(ps_low_arr)
 ps_high_arr = np.array(ps_high_arr)
 k_arr = np.array(k_arr)
 #pixel_window = np.zeros_like(ps_low_arr)
-'''
+
 ps_low_arr= np.load('ps_low_res_v3.npy')
 ps_high_arr = np.load('ps_high_res_v3.npy')
 k_arr = np.load('k_arr_v3.npy')
 pixel_window = np.zeros_like(ps_low_arr)
 
 for i in range(no_of_realizations):
-   pixel_window[i] = ps_high_arr[i]/ps_low_arr[i]
+   pixel_window[i] = ps_low_arr[i]/ps_high_arr[i]
 pixel_window = np.mean(pixel_window, axis=0)
 np.save('pixel_window_v3.npy', pixel_window)
 '''
