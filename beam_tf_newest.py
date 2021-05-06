@@ -34,7 +34,7 @@ with h5py.File(real_map, mode="r") as my_file:
    real_rms = np.array(my_file['rms_coadd'][:]) #Dataset {4, 64, 120, 120}
 
 
-no_of_realizations = 10
+no_of_realizations = 4
 mcmc_params = importlib.import_module('mc_cube')
 
 exp_params = importlib.import_module('exp_cube')
