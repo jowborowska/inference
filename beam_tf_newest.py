@@ -34,7 +34,7 @@ with h5py.File(real_map, mode="r") as my_file:
    real_rms = np.array(my_file['rms_coadd'][:]) #Dataset {4, 64, 120, 120}
 
 
-no_of_realizations = 4
+no_of_realizations = 100
 mcmc_params = importlib.import_module('mc_cube')
 
 exp_params = importlib.import_module('exp_cube')
@@ -70,10 +70,10 @@ for i in range(no_of_realizations):
    signal_map_low_res = my_map_low_res
    signal_map_high_res = my_map_high_res
    #signal_maps.append(signal_map)
-   rms_low_res = np.zeros_like(my_map_low_res) + 1.0 #Comment this one out to get pseudo spectra!!!
-   #rms_low_res = real_rms
-   rms_high_res = np.zeros_like(my_map_high_res) + 1.0
-   #rms_high_res = real_rms
+   #rms_low_res = np.zeros_like(my_map_low_res) + 1.0 #Comment this one out to get pseudo spectra!!!
+   rms_low_res = real_rms
+   #rms_high_res = np.zeros_like(my_map_high_res) + 1.0
+   rms_high_res = real_rms
   
 
    #Create a map file
