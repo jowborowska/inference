@@ -70,10 +70,10 @@ for i in range(no_of_realizations):
    signal_map_low_res = my_map_low_res
    signal_map_high_res = my_map_high_res
    #signal_maps.append(signal_map)
-   #rms_low_res = np.zeros_like(my_map_low_res) + 1.0
-   rms_low_res = real_rms
-   #rms_high_res = np.zeros_like(my_map_high_res) + 1.0
-   rms_high_res = real_rms
+   rms_low_res = np.zeros_like(my_map_low_res) + 1.0 #Comment this one out to get pseudo spectra!!!
+   #rms_low_res = real_rms
+   rms_high_res = np.zeros_like(my_map_high_res) + 1.0
+   #rms_high_res = real_rms
   
 
    #Create a map file
