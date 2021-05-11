@@ -80,8 +80,12 @@ class MapCosmo():
         self.dy = self.y[1] - self.y[0]
         self.dz = self.z[1] - self.z[0]
         
-        self.voxel_volume = self.dx * self.dy * self.dz  # voxel volume in (Mpc/h)^3
+        self.voxel_volume = self.dx * self.dy * self.dz  # voxel volume in (Mpc/h)^3 ? or Mpc^3?
+        print (self.dx,self.dy, self.dz, self.voxel_volume )
 
+
+
+  
     def interpret_mapname(self, mappath):
         self.mappath = mappath
         mapname = mappath.rpartition('/')[-1]
