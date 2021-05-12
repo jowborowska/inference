@@ -3,7 +3,7 @@ import numpy as np
 cosmology = 'Planck15'  # must be an astropy compatible cosmology
 
 map_smoothing = True
-FWHM = 4  # arcmin Haavard, Pullen
+FWHM = 1  # arcmin Haavard, Pullen
 FWHM_nu = 30.0 * 1e-3# 40.0 * 1e-3  # in GHz
 resolution_factor = 4  # how much finer resolution to use for pixels in high-res map before smoothing
 # FWHM = 6  # arcmin Li
